@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class HelloController {
+public class IndexController {
 
     //request 请求
     //controller 可以理解为 允许这个类接受前端的一个请求
@@ -19,6 +19,7 @@ public class HelloController {
         return "index";
     }
 */
+    @GetMapping("/")
     public String index(){
         return "index";
     }
