@@ -1,0 +1,138 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Posez vous des questions</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/community.css">
+    <script src="js/bootstrap.min.js" type="application/javascript">
+    </script>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Univ-community</span>
+
+            </button>
+            <a class="navbar-brand" href="/">Univ-community</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">Link</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">One more separated link</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-left">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Qu-est ce que tu cherche?">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li th:if="${session.user != null}" >
+                    <a href="/publish">
+                        publier
+                    </a></li>
+                <li class="dropdown" th:if="${session.user != null}">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Moi <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Messages</a></li>
+                        <li><a href="#">Mon Profil</a></li>
+                        <li><a href="#">Déconnxion</a></li>
+                    </ul>
+                </li>
+                <li th:if="${session.user==null}">
+                    <a href="https://github.com/login/oauth/authorize?client_id=68b4c5f0d29af797b0f0&redirect_uri=http://localhost:8887/callback&scope=user&state=1">Autentification</a>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<div class="container-fluid main">
+    <div class="row">
+        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+            <h3>
+              <!--  <svg class="bi bi-plus-circle-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M16 8A8 8 0 110 8a8 8 0 0116 0zM8.5 4a.5.5 0 00-1 0v3.5H4a.5.5 0 000 1h3.5V12a.5.5 0 001 0V8.5H12a.5.5 0 000-1H8.5V4z" clip-rule="evenodd"/>
+                </svg>-->
+                <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                Ask Question
+            </h3>
+            <hr>
+            <form action="/publish" method="post">
+                <div class="form-group">
+                    <label for="title">Titre</label>
+                    <br>
+                    <small>Be spécifie votre question et imaginez vous êtes en train de poser une question à une autre personne </small>
+                    <input type="text" class="form-control" th:value="${title}" id="title"
+                           name="title"
+                           placeholder="Titre de votre question...">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description de question soyez preciser :</label>
+                    <textarea class="form-control" th:text="${description}" name="description"
+                              id="description" cols="30"
+                              rows="10"></textarea>
+                    <!--                        <input type="text" class="form-control" id="titre" name="titre" placeholder="Description de votre question">-->
+                </div>
+                <div class="form-group">
+                    <label for="tag">Ajouter un tag</label>
+                    <input type="text" class="form-control" th:value="${tag}" id="tag" name="tag"
+                           placeholder="Entrer un tag">
+                </div>
+
+                <div class="container-fluid main">
+                    <div class="row">
+                        <div class="alert  col-lg-9 col-md-12 col-sm-12 col-xs-12" th:text="${error}"></div>
+                        <button type="submit"
+                                class="btn btn-success btn-publish col-lg-3 col-md-12 col-sm-12 col-xs-12">Poste</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <h3>Conseil des questions </h3>
+
+            Le Univ-community est ici pour vous aider avec les questions qu tours de coding, algorithme ou langage problems.
+
+            <h3>Par-rapport aux questions</h3>
+
+            Inclure des détails sur votre objectif
+
+            Décrire les résultats attendus et réels
+
+            Inclure tous les messages d'erreur
+
+            <h3>Décrire qu'est ce que vous avez essayé</h3>
+
+            Montrez ce que vous avez essayé et dites-nous ce que vous avez trouvé (sur ce site ou ailleurs) et pourquoi cela ne répondait pas à vos besoins.
+
+            Vous pouvez obtenir de meilleures réponses lorsque vous effectuez des recherches.
+
+            <h3>Montrez votre code</h3>
+
+            Le cas échéant, partagez la quantité minimale de code dont d'autres ont besoin pour reproduire votre problème (également appelé exemple minimum reproductible).
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
