@@ -42,7 +42,7 @@
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Qu-est ce que tu cherche?">
                 </div>
-                <button type="submit" class="btn btn-default">Submit</button>
+                <button type="submit" class="btn btn-default">Cherche</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
                 <li th:if="${session.user != null}">
@@ -59,7 +59,8 @@
                     </ul>
                 </li>
                 <li th:if="${session.user==null}">
-                    <a href="https://github.com/login/oauth/authorize?client_id=68b4c5f0d29af797b0f0&redirect_uri=http://localhost:8887/callback&scope=user&state=1">Autentification</a>
+                    <a href="https://github.com/login/oauth/authorize?client_id=68b4c5f0d29af797b0f0&redirect_uri=http://localhost:8887/callback&scope=user&state=1   ">Autentification</a>
+                    <!--?client_id=68b4c5f0d29af797b0f0&redirect_uri=http://localhost:8887/callback&scope=user&state=1-->
                 </li>
             </ul>
         </div><!-- /.navbar-collapse -->
@@ -84,7 +85,6 @@
             <div class="media" th:each="question : ${questions}">
                 <div class="media-left">
                         <img class="media-object img-circle" th:src="${question.user.avatarUrl}">
-                    <!-- css 不导入或者部分导入 在确定编码没有问题的情况下 清除浏览器缓存-->
                 </div>
                 <div class="media-body">
                     <h4 class="media-heading" th:text="${question.title}">Titre</h4>
@@ -93,8 +93,7 @@
                     <span class="text-desc"><span
                             th:text="${question.commentCount}"></span>Réponses
                         · <span th:text="${question.viewCount}"></span>Vue ·
-                        <span
-                                th:text="${#dates.format(question.gmtCreate,'HH:mm dd-MM-yyyy')}"></span></span>
+                        <span th:text="${#dates.format(question.gmtCreate,'HH:mm dd-MM-yyyy')}"></span></span>
                 </div>
             </div>
             <hr>

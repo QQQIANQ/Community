@@ -58,9 +58,9 @@ public class AutorizeController {
             return "redirect:/";//redirection
             // login success
         }
-        else {
+
             return "redirect:/";
             //login failed
-        }
+
     }
 }
